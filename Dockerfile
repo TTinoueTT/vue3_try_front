@@ -23,7 +23,8 @@ WORKDIR ${HOME}
 
 EXPOSE ${FRONT_PORT_CONTAINER_SIDE}
 
-RUN npm install -g pnpm
+RUN npm install -g npm@9.6.7
+# RUN npm install -g pnpm
 # RUN pnpm --version
 # RUN npx pnpm install -g pnpm
 
