@@ -33,6 +33,13 @@ const routeSettings: RouteRecordRaw[] = [
                 id: idNum
             };
         }
+    },
+    {
+        path: "/member/others/:point",
+        name: "MemberOthers",
+        component: () => {
+            return import("@/views/member/MemberOthers.vue"); //dynamic imports(動的インポート)
+        }
     }
 ];
 
