@@ -5,8 +5,38 @@ import type { RouteRecordRaw } from "vue-router";
 import AppTop from "@/views/AppTop.vue";
 // import HomeView from "../views/HomeView.vue";
 
-const routeSettings: RouteRecordRaw[] = [{ path: "/", name: "AppTop", component: AppTop }];
+const routeSettings: RouteRecordRaw[] = [
+    { path: "/", name: "AppTop", component: AppTop },
+    {
+        path: "/member/memberList",
+        name: "MemberList",
+        component: () => {
+            return import("@/views/member/MemberList.vue"); //dynamic imports(動的インポート)
+        }
+    },
+    {
+        path: "/member/add",
+        name: "MemberAdd",
+        component: () => {
+            return import("@/views/member/MemberAdd.vue"); //dynamic imports(動的インポート)
+        }
+    },
+    {
+        path: "/member/detail/:id",
+        name: "MemberDetail",
+        component: () => {
+            return import("@/views/member/MemberDetail.vue"); //dynamic imports(動的インポート)
+        },
+        props: (routes) => {
+            const idNum = Number(routes.params.id);
+            return {
+                id: idNum
+            };
+        }
+    }
+];
 
+// ルーティングに関する設定をオブジェクトとして渡す
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     // routes: [

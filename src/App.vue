@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, provide } from "vue";
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+import { RouterView } from "vue-router";
+// import HelloWorld from "./components/HelloWorld.vue";
 import type { Member } from "@/types";
 
 const memberList = new Map<number, Member>();

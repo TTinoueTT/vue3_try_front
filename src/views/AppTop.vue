@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import { RouterLink } from "vue-router";
+</script>
 <template>
     <h1>TOP</h1>
     <nav id="breadcrumbs">
@@ -6,6 +9,8 @@
         </ul>
     </nav>
     <section>
-        <p>会員登録はこちら</p>
+        <p>
+            <RouterLink v-bind:to="{ name: 'MemberList' }"> 会員登録はこちら </RouterLink>
+        </p>
     </section>
 </template>
