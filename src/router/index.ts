@@ -3,10 +3,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import AppTop from "@/views/AppTop.vue";
+import SubTop from "@/views/SubTop.vue";
 // import HomeView from "../views/HomeView.vue";
 
 const routeSettings: RouteRecordRaw[] = [
-    { path: "/", name: "AppTop", component: AppTop },
+    // { path: "/", name: "AppTop", component: AppTop },
+    {
+        path: "/",
+        name: "AppTop",
+        components: {
+            default: AppTop,
+            sub: SubTop
+        }
+    },
     {
         path: "/member/memberList",
         name: "MemberList",

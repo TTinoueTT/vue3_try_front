@@ -26,6 +26,7 @@ provide("memberList", reactive(memberList));
     </header>
     <main>
         <RouterView />
+        <RouterView name="sub" />
     </main>
 </template>
 
