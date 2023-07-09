@@ -35,10 +35,26 @@ const routeSettings: RouteRecordRaw[] = [
         }
     },
     {
-        path: "/member/others/:point",
+        // path: "/member/others/:category/:point?", //複数パラメータの実践 (:point? で省略可能パラメータ)
+        path: "/member/others/:category/:point(\\d{5})?", //正規表現チェック 5桁以下を受け付けない
         name: "MemberOthers",
         component: () => {
             return import("@/views/member/MemberOthers.vue"); //dynamic imports(動的インポート)
+        }
+    },
+    {
+        // path: "/member/others2/:id*", //可変長パラメータの実践 (:id* で可変長パラメータとなり、例えば、/member/others2/ でも /member/others2/35/46/37)
+        path: "/member/others2/:id+", //可変長パラメータの実践 (:id+ で可変長パラメータ、必ず一つは指定しなければならない必須パラメータとなる)
+        name: "MemberOthers2",
+        component: () => {
+            return import("@/views/member/MemberOthers2.vue"); //dynamic imports(動的インポート)
+        }
+    },
+    {
+        path: "/:pathMatch(.*)*", //正規表現、可変長パラメータを利用して、存在するルーティング情報以外の全てのURLを受け付ける
+        name: "NotFound",
+        component: () => {
+            return import("@/views/NotFound.vue"); //dynamic imports(動的インポート)
         }
     }
 ];
