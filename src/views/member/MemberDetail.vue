@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { inject, computed } from "vue";
-import { RouterLink } from "vue-router";
+import { inject, computed, watchEffect, ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import type { Member } from "@/types";
 
-interface Props {
-    id: number;
-}
-const props = defineProps<Props>();
+const route = useRoute();
+
+// interface Props {
+//     id: number;
+// }
+// const props = defineProps<Props>();
+let id = Number(route.params.id);
+
 const memberList = inject("memberList") as Map<number, Member>;
-const member = computed((): Member => {
-    return memberList.get(props.id) as Member;
+// const member = computed((): Member => {
+//     return memberList.get(props.id) as Member;
+// });
+
+const member = ref(memberList.get(id) as Member);
+
+watchEffect(() => {
+    id = Number(route.params.id);
+    member.value = memberList.get(id) as Member;
 });
 
 const localNote = computed((): string => {
@@ -17,6 +28,9 @@ const localNote = computed((): string => {
     if (member.value.note != undefined) {
         localNote = member.value.note;
     }
+    // if (member.value.note != undefined) {
+    //     localNote = member.value.note;
+    // }
     return localNote;
 });
 </script>

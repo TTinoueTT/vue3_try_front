@@ -12,28 +12,50 @@ const routeSettings: RouteRecordRaw[] = [
         name: "MemberList",
         component: () => {
             return import("@/views/member/MemberList.vue"); //dynamic imports(動的インポート)
-        }
-    },
-    {
-        path: "/member/add",
-        name: "MemberAdd",
-        component: () => {
-            return import("@/views/member/MemberAdd.vue"); //dynamic imports(動的インポート)
-        }
-    },
-    {
-        path: "/member/detail/:id",
-        name: "MemberDetail",
-        component: () => {
-            return import("@/views/member/MemberDetail.vue"); //dynamic imports(動的インポート)
         },
-        props: (routes) => {
-            const idNum = Number(routes.params.id);
-            return {
-                id: idNum
-            };
-        }
+        children: [
+            {
+                path: "detail/:id",
+                name: "MemberDetail",
+                component: () => {
+                    return import("@/views/member/MemberDetail.vue"); //dynamic imports(動的インポート)
+                }
+                // props: (routes) => {
+                //     const idNum = Number(routes.params.id);
+                //     return {
+                //         id: idNum
+                //     };
+                // }
+            },
+            {
+                path: "add",
+                name: "MemberAdd",
+                component: () => {
+                    return import("@/views/member/MemberAdd.vue"); //dynamic imports(動的インポート)
+                }
+            }
+        ]
     },
+    // {
+    //     path: "/member/add",
+    //     name: "MemberAdd",
+    //     component: () => {
+    //         return import("@/views/member/MemberAdd.vue"); //dynamic imports(動的インポート)
+    //     }
+    // },
+    // {
+    //     path: "/member/detail/:id",
+    //     name: "MemberDetail",
+    //     component: () => {
+    //         return import("@/views/member/MemberDetail.vue"); //dynamic imports(動的インポート)
+    //     },
+    //     props: (routes) => {
+    //         const idNum = Number(routes.params.id);
+    //         return {
+    //             id: idNum
+    //         };
+    //     }
+    // },
     {
         // path: "/member/others/:category/:point?", //複数パラメータの実践 (:point? で省略可能パラメータ)
         path: "/member/others/:category/:point(\\d{5})?", //正規表現チェック 5桁以下を受け付けない
