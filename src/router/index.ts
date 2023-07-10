@@ -82,6 +82,17 @@ const routeSettings: RouteRecordRaw[] = [
             return import("@/views/member/MemberOthers2.vue"); //dynamic imports(動的インポート)
         }
     },
+
+    {
+        path: "/member/go", // うまくいかないのでリダイレクト処理はあとで考える。
+        name: "MemberGo",
+        redirect: (to) => {
+            return {
+                name: "MemberGo"
+            };
+        }
+    },
+
     {
         path: "/:pathMatch(.*)*", //正規表現、可変長パラメータを利用して、存在するルーティング情報以外の全てのURLを受け付ける
         name: "NotFound",
