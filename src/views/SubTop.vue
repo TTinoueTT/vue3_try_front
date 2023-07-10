@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+// コンポーネントごとのガードはここで
 </script>
 <template>
     <h1>SubTop</h1>

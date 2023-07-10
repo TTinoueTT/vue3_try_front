@@ -15,6 +15,7 @@ const routeSettings: RouteRecordRaw[] = [
             default: AppTop,
             sub: SubTop
         }
+        // ルーティングごとのガード、各ルーティングにbeforeEnterプロパティで設定できる
     },
     {
         path: "/member/memberList",
@@ -110,5 +111,7 @@ const router = createRouter({
     // ]
     routes: routeSettings
 });
+
+// ナビゲーションガードのグローバルガードはここで定義される
 
 export default router;

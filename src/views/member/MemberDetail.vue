@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, computed, watchEffect, ref } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Member } from "@/types";
 
 const route = useRoute();
@@ -18,9 +18,17 @@ const memberList = inject("memberList") as Map<number, Member>;
 
 const member = ref(memberList.get(id) as Member);
 
-watchEffect(() => {
-    id = Number(route.params.id);
+// watchEffect(() => {
+//     id = Number(route.params.id);
+//     member.value = memberList.get(id) as Member;
+// });
+
+onBeforeRouteUpdate((to, from) => {
+    // to と from は RouteLocationNormalized オブジェクト
+    id = Number(to.params.id);
     member.value = memberList.get(id) as Member;
+    console.log(to); // 遷移元での RouteLocationNormalized オブジェクト
+    console.log(from); // 遷移先での RouteLocationNormalized オブジェクト
 });
 
 const localNote = computed((): string => {
