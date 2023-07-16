@@ -12,12 +12,17 @@ export const useCounterStore = defineStore({
     state: (): State => {
         // データ本体(オブジェクト)
         return {
+            // データ名: 初期値,
             counter: 0
         };
     },
 
     getters: {
         // データの出力時の加工処理
+        // ゲッタ名: (state): 加工データの型 => {
+        //     // ステートを元に加工したデータを用意する処理
+        //     return 加工データ;
+        // },
         doubleCount: (state): number => {
             return state.counter * 2;
         }
@@ -25,6 +30,9 @@ export const useCounterStore = defineStore({
 
     actions: {
         // 保持データの変更処理
+        // アクション関数名(): void {
+        //     // ステートの変更処理
+        // },
         incrementCount(): void {
             this.counter++;
         }
