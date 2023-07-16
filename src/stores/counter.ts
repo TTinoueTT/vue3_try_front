@@ -1,20 +1,31 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia"; // defineStore() 関数をインポート
 
-// useCounterStore を export
+interface State {
+    counter: number;
+}
+
+// useCounterStore(use + ストア名 + Store のキャメル記法) を export
 export const useCounterStore = defineStore({
-    id: "counter", // ストア名
-    state: () => ({
+    id: "counter", // ストア名(ファイル名と同一)
+
+    state: (): State => {
         // データ本体(オブジェクト)
-        counter: 0
-    }),
+        return {
+            counter: 0
+        };
+    },
+
     getters: {
         // データの出力時の加工処理
-        doubleCount: (state) => state.counter * 2
+        doubleCount: (state): number => {
+            return state.counter * 2;
+        }
     },
+
     actions: {
         // 保持データの変更処理
-        increment() {
+        incrementCount(): void {
             this.counter++;
         }
     }
