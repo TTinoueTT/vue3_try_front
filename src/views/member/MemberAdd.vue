@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { inject, reactive } from "vue";
+import { reactive } from "vue";
+// import { inject, reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import type { Member } from "@/types";
+import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
 
 const router = useRouter();
-const memberList = inject("memberList") as Map<number, Member>;
+const membersStore = useMembersStore();
+// const memberList = inject("memberList") as Map<number, Member>;
 const member: Member = reactive({
     id: 0,
     name: "",
@@ -15,13 +18,20 @@ const member: Member = reactive({
 
 // 入力データを会員リストデータに追加する
 // リスト画面に遷移する
+// const onAdd = (): void => {
+//     console.log(member);
+//     memberList.set(member.id, member);
+//     // router.push({ name: "MemberList" }); // ここでページ遷移を実行する(会員リスト)
+//     // パラメータ付きでの遷移を行うには router.push({ name: "MemberDetail", params: { id: member.id } }) みたいにする
+//     router.push({ name: "MemberDetail", params: { id: member.id } }); // 会員詳細に遷移
+// };
+
+// 11.2.6 引数付きのアクションの利用 *****************************************************************************
 const onAdd = (): void => {
-    console.log(member);
-    memberList.set(member.id, member);
-    // router.push({ name: "MemberList" }); // ここでページ遷移を実行する(会員リスト)
-    // パラメータ付きでの遷移を行うには router.push({ name: "MemberDetail", params: { id: member.id } }) みたいにする
-    router.push({ name: "MemberDetail", params: { id: member.id } }); // 会員詳細に遷移
+    membersStore.addMember(member);
+    router.push({ name: "MemberList" });
 };
+// ***********************************************************************************************************
 </script>
 
 <template>
