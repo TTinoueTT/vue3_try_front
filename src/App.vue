@@ -14,6 +14,7 @@ provide("memberList", reactive(memberList));
 const counterStore = useCounterStore(); // use を抜いた変数名にする。これがストアオブジェクトそのものになる
 
 // 以下で取得したストアオブジェクトを使用して各種値をメソッドを利用して出力
+// const count = counterStore.counter とすると、リアクティブシステムが動かなくなる
 const count = computed((): number => {
     return counterStore.counter;
 });
@@ -24,6 +25,10 @@ const doubleCount = computed((): number => {
 
 const onIncrementClick = () => {
     counterStore.incrementCount();
+};
+
+const resetCount = () => {
+    counterStore.$reset();
 };
 </script>
 
@@ -45,6 +50,7 @@ const onIncrementClick = () => {
         <p>現在のポイント: {{ count }}(counterの値)</p>
         <p>現在のポイントさらに倍: {{ doubleCount }}(getterを利用したdoubleCountの値)</p>
         <button @click="onIncrementClick">加算(actionsを利用したonIncrementClickを発火)</button>
+        <button @click="resetCount">リセット(ストアオブジェクトの値を初期値に戻す)</button>
         <RouterView />
         <RouterView name="sub" />
     </main>
