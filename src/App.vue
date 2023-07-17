@@ -2,14 +2,16 @@
 import { reactive, provide, computed } from "vue";
 import { RouterView } from "vue-router";
 // import HelloWorld from "./components/HelloWorld.vue";
-import type { Member } from "@/types";
+// import type { Member } from "@/types";
 import { useCounterStore } from "@/stores/counter"; // export された counter ストアの利用
+import { useMembersStore } from "@/stores/members"; // export された counter ストアの利用
 
-const memberList = new Map<number, Member>();
-memberList.set(33456, { id: 33456, name: "田中太郎", email: "bow@example.com", points: 35, note: "初回入会特典あり" });
-memberList.set(47783, { id: 47783, name: "鈴木二郎", email: "mue@example.com", points: 53 });
-provide("memberList", reactive(memberList));
+// const memberList = new Map<number, Member>();
+// memberList.set(33456, { id: 33456, name: "田中太郎", email: "bow@example.com", points: 35, note: "初回入会特典あり" });
+// memberList.set(47783, { id: 47783, name: "鈴木二郎", email: "mue@example.com", points: 53 });
+// provide("memberList", reactive(memberList));
 
+// 11.1 Piniaの基本 ******************************************************************************
 // storeを利用した変数を定義
 const counterStore = useCounterStore(); // use を抜いた変数名にする。これがストアオブジェクトそのものになる
 
@@ -30,11 +32,17 @@ const onIncrementClick = () => {
 const resetCount = () => {
     counterStore.$reset();
 };
+// *********************************************************************************************
+
+// 11.2 引数を使う一歩進んだPiniaの利用方法 *********************************************************
+const membersStore = useMembersStore();
+membersStore.initList();
+// *********************************************************************************************
 </script>
 
 <template>
     <header>
-        <h1>Vue Routerサンプル</h1>
+        <h1>Piniaサンプル</h1>
         <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
         <div class="wrapper">

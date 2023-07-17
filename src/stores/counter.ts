@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia"; // defineStore() 関数をインポート
 
-interface State {
+interface Counter {
     counter: number;
 }
 
@@ -9,7 +9,7 @@ interface State {
 export const useCounterStore = defineStore({
     id: "counter", // ストア名(ファイル名と同一)
 
-    state: (): State => {
+    state: (): Counter => {
         // データ本体(オブジェクト)
         return {
             // データ名: 初期値,
