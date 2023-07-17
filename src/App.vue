@@ -4,7 +4,7 @@ import { RouterView } from "vue-router";
 // import HelloWorld from "./components/HelloWorld.vue";
 // import type { Member } from "@/types";
 import { useCounterStore } from "@/stores/counter"; // export された counter ストアの利用
-import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
+// import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
 import type { Member } from "./types";
 
 // const memberList = new Map<number, Member>();
@@ -35,10 +35,10 @@ const resetCount = () => {
 };
 // *********************************************************************************************
 
-// 11.2 引数を使う一歩進んだPiniaの利用方法 *********************************************************
-const membersStore = useMembersStore();
-membersStore.initList();
-// *********************************************************************************************
+// // 11.2 引数を使う一歩進んだPiniaの利用方法 *********************************************************
+// const membersStore = useMembersStore();
+// membersStore.initList();
+// // *********************************************************************************************
 </script>
 
 <template>

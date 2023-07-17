@@ -5,10 +5,15 @@ import type { Member } from "@/types";
 import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
 
 const membersStore = useMembersStore();
+membersStore.prepareMemberList();
 
 // const memberList = inject("memberList") as Map<number, Member>;
 const memberList = computed((): Map<number, Member> => {
     return membersStore.memberList;
+});
+
+const isEmptyList = computed((): boolean => {
+    return membersStore.isMemberListEmpty;
 });
 </script>
 
@@ -25,6 +30,7 @@ const memberList = computed((): Map<number, Member> => {
         <p>新規登録は<RouterLink v-bind:to="{ name: 'MemberAdd' }">こちら</RouterLink>から</p>
         <div>
             <ul>
+                <li v-if="isEmptyList">会員情報は存在しません。</li>
                 <li v-for="[id, member] in memberList" v-bind:key="id">
                     <RouterLink v-bind:to="{ name: 'MemberDetail', params: { id: id } }"> IDが{{ id }}の{{ member.name }}さん </RouterLink>
                 </li>
