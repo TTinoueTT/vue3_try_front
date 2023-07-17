@@ -2,34 +2,41 @@
 import { inject, computed, watchEffect, ref } from "vue";
 import { RouterLink, onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Member } from "@/types";
+import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
 
 const route = useRoute();
 
-// interface Props {
-//     id: number;
-// }
-// const props = defineProps<Props>();
-let id = Number(route.params.id);
+interface Props {
+    id: number;
+}
+const props = defineProps<Props>();
 
-const memberList = inject("memberList") as Map<number, Member>;
-// const member = computed((): Member => {
-//     return memberList.get(props.id) as Member;
-// });
+const membersStore = useMembersStore();
+const member = computed((): Member => {
+    return membersStore.getById(props.id);
+});
 
-const member = ref(memberList.get(id) as Member);
+// let id = Number(route.params.id);
+
+// const memberList = inject("memberList") as Map<number, Member>;
+// // const member = computed((): Member => {
+// //     return memberList.get(props.id) as Member;
+// // });
+
+// const member = ref(memberList.get(id) as Member);
 
 // watchEffect(() => {
 //     id = Number(route.params.id);
 //     member.value = memberList.get(id) as Member;
 // });
 
-onBeforeRouteUpdate((to, from) => {
-    // to と from は RouteLocationNormalized オブジェクト
-    id = Number(to.params.id);
-    member.value = memberList.get(id) as Member;
-    console.log(to); // 遷移元での RouteLocationNormalized オブジェクト
-    console.log(from); // 遷移先での RouteLocationNormalized オブジェクト
-});
+// onBeforeRouteUpdate((to, from) => {
+//     // to と from は RouteLocationNormalized オブジェクト
+//     id = Number(to.params.id);
+//     member.value = memberList.get(id) as Member;
+//     console.log(to); // 遷移元での RouteLocationNormalized オブジェクト
+//     console.log(from); // 遷移先での RouteLocationNormalized オブジェクト
+// });
 
 const localNote = computed((): string => {
     let localNote = "--";

@@ -12,7 +12,16 @@ export const useMembersStore = defineStore({
             memberList: new Map<number, Member>()
         };
     },
-    getters: {},
+    getters: {
+        getById: (state) => {
+            return (id: number): Member => {
+                const member = state.memberList.get(id) as Member;
+                console.log(member);
+
+                return member;
+            };
+        }
+    },
     actions: {
         initList(): void {
             this.memberList.set(33456, { id: 33456, name: "田中太郎", email: "bow@example.com", points: 35, note: "初回入会特典あり" });

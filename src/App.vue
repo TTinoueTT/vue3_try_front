@@ -4,7 +4,8 @@ import { RouterView } from "vue-router";
 // import HelloWorld from "./components/HelloWorld.vue";
 // import type { Member } from "@/types";
 import { useCounterStore } from "@/stores/counter"; // export された counter ストアの利用
-import { useMembersStore } from "@/stores/members"; // export された counter ストアの利用
+import { useMembersStore } from "@/stores/members"; // export された members ストアの利用
+import type { Member } from "./types";
 
 // const memberList = new Map<number, Member>();
 // memberList.set(33456, { id: 33456, name: "田中太郎", email: "bow@example.com", points: 35, note: "初回入会特典あり" });

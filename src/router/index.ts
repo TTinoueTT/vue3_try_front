@@ -29,13 +29,13 @@ const routeSettings: RouteRecordRaw[] = [
                 name: "MemberDetail",
                 component: () => {
                     return import("@/views/member/MemberDetail.vue"); //dynamic imports(動的インポート)
+                },
+                props: (routes) => {
+                    const idNum = Number(routes.params.id);
+                    return {
+                        id: idNum
+                    };
                 }
-                // props: (routes) => {
-                //     const idNum = Number(routes.params.id);
-                //     return {
-                //         id: idNum
-                //     };
-                // }
             },
             {
                 path: "add",
