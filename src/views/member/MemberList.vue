@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { inject, computed } from "vue";
+// import { inject, computed } from "vue";
+import { computed } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import type { Member } from "@/types";
 import { useMembersStore } from "@/stores/members"; // export された members ストアの利用

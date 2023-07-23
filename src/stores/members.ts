@@ -34,19 +34,22 @@ export const useMembersStore = defineStore({
         //     this.memberList.set(member.id, member);
         // }
         prepareMemberList(): void {
-            // 空のmemberListを用意
-            let memberList = new Map<number, Member>();
-            // セッションストレージからデータを取得、getItem("キー文字列")
-            const memberListJSONStr = sessionStorage.getItem("memberList");
+            let memberList = new Map<number, Member>(); // 空のmemberListを用意
+            const memberListJSONStr = sessionStorage.getItem("memberList"); // セッションストレージからデータを取得、getItem("キー文字列")
             // セッションストレージのデータが空じゃないなら
             if (memberListJSONStr != undefined) {
-                // JSON文字列をJSONオブジェクトに変換
-                const memberListJSON = JSON.parse(memberListJSONStr);
-                // JSONオブジェクトを元にmemberListを生成
-                memberList = new Map<number, Member>(memberListJSON);
+                const memberListJSON = JSON.parse(memberListJSONStr); // JSON文字列をJSONオブジェクトに変換
+                memberList = new Map<number, Member>(memberListJSON); // JSONオブジェクトを元にmemberListを生成
             }
             // ステートにmemberListを格納
             this.memberList = memberList;
+        },
+
+        insertMember(member: Member): void {
+            this.memberList.set(member.id, member); // ステートの memberList に引数の会員情報を追加
+            const memberListJSONStr = JSON.stringify([...this.memberList]); // ステートの memberList をJSON文字列に変換
+            // セッションストレージに格納
+            sessionStorage.setItem("memberList", memberListJSONStr);
         }
     }
 });
